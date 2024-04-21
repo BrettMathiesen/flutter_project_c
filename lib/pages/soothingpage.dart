@@ -140,135 +140,137 @@ class _SoothingPageState extends State<SoothingPage> {
           title: const Text("Soothing",
               style: TextStyle(
                   fontSize: 30, color: Color.fromARGB(255, 145, 245, 247)))),
-      body: Form(
-        key: _formKey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                RichText(
-                  text: const TextSpan(
-                    style: TextStyle(
-                      fontSize: 16.0,
+      body: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  RichText(
+                    text: const TextSpan(
+                      style: TextStyle(
+                        fontSize: 16.0,
+                      ),
+                      children: [
+                        TextSpan(
+                            text: 'Situation > Emotions > ',
+                            style:
+                                TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
+                        TextSpan(
+                            text: 'Soothing',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.deepPurpleAccent)),
+                        TextSpan(
+                            text: ' > Actions',
+                            style:
+                                TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
+                      ],
                     ),
-                    children: [
-                      TextSpan(
-                          text: 'Situation > Emotions > ',
-                          style:
-                              TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
-                      TextSpan(
-                          text: 'Soothing',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.deepPurpleAccent)),
-                      TextSpan(
-                          text: ' > Actions',
-                          style:
-                              TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
-                    ],
                   ),
+                ],
+              ),
+              Container(
+                margin: const EdgeInsets.only(
+                    top: 25.0, left: 20.0, right: 8.0, bottom: 0),
+                padding: const EdgeInsets.all(10),
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text('Validate:',
+                        style: TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.deepPurpleAccent))
+                  ],
                 ),
-              ],
-            ),
-            Container(
-              margin: const EdgeInsets.only(
-                  top: 25.0, left: 20.0, right: 8.0, bottom: 0),
-              padding: const EdgeInsets.all(10),
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text('Validate:',
-                      style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.deepPurpleAccent))
-                ],
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(
-                  top: 5.0, left: 25.0, right: 25.0, bottom: 10),
-              padding: const EdgeInsets.all(15),
-              decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 194, 232, 249),
-                  borderRadius: BorderRadius.circular(10.0)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                      flex: 1,
-                      child:
-                          Text((validateText), style: TextStyle(fontSize: 16))),
-                ],
+              Container(
+                margin: const EdgeInsets.only(
+                    top: 5.0, left: 25.0, right: 25.0, bottom: 10),
+                padding: const EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 194, 232, 249),
+                    borderRadius: BorderRadius.circular(10.0)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                        flex: 1,
+                        child:
+                            Text((validateText), style: TextStyle(fontSize: 16))),
+                  ],
+                ),
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(
-                  top: 10.0, left: 20.0, right: 8.0, bottom: 0),
-              padding: const EdgeInsets.all(10),
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text('Reassurance:',
-                      style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.deepPurpleAccent))
-                ],
+              Container(
+                margin: const EdgeInsets.only(
+                    top: 10.0, left: 20.0, right: 8.0, bottom: 0),
+                padding: const EdgeInsets.all(10),
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text('Reassurance:',
+                        style: TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.deepPurpleAccent))
+                  ],
+                ),
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(
-                  top: 5.0, left: 25.0, right: 25.0, bottom: 10),
-              padding: const EdgeInsets.all(15),
-              decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 194, 232, 249),
-                  borderRadius: BorderRadius.circular(10.0)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                      flex: 1,
-                      child:
-                          Text((reassureText), style: TextStyle(fontSize: 16)))
-                ],
+              Container(
+                margin: const EdgeInsets.only(
+                    top: 5.0, left: 25.0, right: 25.0, bottom: 10),
+                padding: const EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 194, 232, 249),
+                    borderRadius: BorderRadius.circular(10.0)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                        flex: 1,
+                        child:
+                            Text((reassureText), style: TextStyle(fontSize: 16)))
+                  ],
+                ),
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(
-                  top: 10.0, left: 20.0, right: 8.0, bottom: 0),
-              padding: const EdgeInsets.all(10),
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text('Suggestions:',
-                      style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.deepPurpleAccent))
-                ],
+              Container(
+                margin: const EdgeInsets.only(
+                    top: 10.0, left: 20.0, right: 8.0, bottom: 0),
+                padding: const EdgeInsets.all(10),
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text('Suggestions:',
+                        style: TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.deepPurpleAccent))
+                  ],
+                ),
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(
-                  top: 5.0, left: 25.0, right: 25.0, bottom: 0),
-              padding: const EdgeInsets.all(15),
-              decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 194, 232, 249),
-                  borderRadius: BorderRadius.circular(10.0)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                      flex: 1,
-                      child: Text((suggestionText),
-                          style: TextStyle(fontSize: 16)))
-                ],
+              Container(
+                margin: const EdgeInsets.only(
+                    top: 5.0, left: 25.0, right: 25.0, bottom: 0),
+                padding: const EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 194, 232, 249),
+                    borderRadius: BorderRadius.circular(10.0)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                        flex: 1,
+                        child: Text((suggestionText),
+                            style: TextStyle(fontSize: 16)))
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: BottomAppBar(

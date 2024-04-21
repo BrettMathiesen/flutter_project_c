@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-//import '../read data/get_user_name.dart';
+import '../readdata/get_user_events.dart';
 
 class EventListPage extends StatefulWidget {
   const EventListPage({super.key});
@@ -14,12 +13,17 @@ class EventListPage extends StatefulWidget {
 class EventListPageState extends State<EventListPage> {
   String uid = "";
 
-// document IDs
+  // document IDs
   List<String> docIDs = [];
 
 // get docIDs
   Future getDocID() async {
-    await FirebaseFirestore.instance.collection('Events').get().then(
+    await FirebaseFirestore.instance
+        .collection('events')
+        .doc(uid)
+        .collection('myevents')
+        .get()
+        .then(
           (snapshot) => snapshot.docs.forEach((document) {
             print(document.reference);
             docIDs.add(document.reference.id);
@@ -31,6 +35,7 @@ class EventListPageState extends State<EventListPage> {
     //  getDocID();
     super.initState();
     getUID();
+    //getDocID();
   }
 
   getUID() {
@@ -61,131 +66,37 @@ class EventListPageState extends State<EventListPage> {
             onTap: () {
               logOut(context);
             },
-            child: Icon(Icons.logout),
+            child: Icon(Icons.exit_to_app),
           ),
         ],
       ),
-      body: StreamBuilder(
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Container(child: CircularProgressIndicator());
-          } else {
-            final docs = snapshot.data!.docs;
-
-            return GridView.custom(
-                physics: ScrollPhysics(),
-                shrinkWrap: true,
-                scrollDirection: Axis.vertical,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 1,
-                    crossAxisSpacing: 5,
-                    mainAxisSpacing: 5,
-                    childAspectRatio: 1 / .4),
-                childrenDelegate: SliverChildBuilderDelegate((context, index) {
-                  return Container(
+      body: Column(
+        children: [
+          Expanded(
+            child: FutureBuilder(
+              future: getDocID(),
+              builder: (context, snapshot) {
+                return ListView.builder(
+                  itemCount: docIDs.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      margin: const EdgeInsets.all(12),
+                     // padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 194, 232, 249),
-                        borderRadius: BorderRadius.circular(10),
-                      //  border: Border.all(color: Colors.black),
+                          color: Color.fromARGB(255, 194, 232, 249),
+                          borderRadius: BorderRadius.circular(10.0)),
+                      child: ListTile(
+                        title: GetUserEvents(documentID: docIDs[index], uid: uid),
                       ),
-                      padding: const EdgeInsets.all(5.0),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 194, 232, 249),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              padding: EdgeInsets.all(2),
-                              child: Wrap(
-                                children: [
-                                  Text('Situation:  ' +
-                                      docs[index]['situation']),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 194, 232, 249),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              padding: EdgeInsets.all(2),
-                              child: Row(
-                                children: [
-                                  Text('Emotion:  ' + docs[index]['emotion']),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 194, 232, 249),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              padding: EdgeInsets.all(2),
-                              child: Wrap(
-                                children: [
-                                  Text('Action:  ' + docs[index]['action']),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ));
-                }, childCount: docs.length));
-          }
-        },
-        stream: FirebaseFirestore.instance
-            .collection('events')
-            .doc(uid)
-            .collection('myevents')
-            .snapshots(),
+                    );
+                  },
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
-  //  )childCount: docs.length;
-
-  //      return ListView.builder(
-  //          itemBuilder: ((context, index) {
-  //            return ListTile(
-  //              title: Text(docs[index]['situation']),
-  //              subtitle: Text(docs[index]['emotion']),
-  //            );
-  //          }),
-  //          itemCount: docs.length);
 }
-        
-       
-
-/*
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('signed in as: ' + '${[User]}'),
-              Expanded(
-                child: FutureBuilder(
-                  future: getDocID(),
-                  builder: (context, snapshot) {
-                    return ListView.builder(
-                      itemCount: docIDs.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ListTile(
-                              //      title: Text(docIDs[index]),
-                              title: GetUserName(documentID: docIDs[index]),
-                              tileColor: Colors.grey[200],
-                              ),
-                        );
-                      },
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-        ),
-*/
   

@@ -91,15 +91,17 @@ class _EmotionsPageState extends State<EmotionsPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                SizedBox(
+               
+
+                        SizedBox(
                   width: 125,
                   height: 70,
                   child: TextButton(
                     style: TextButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        backgroundColor:
-                            const Color.fromARGB(255, 181, 174, 255)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      backgroundColor: const Color.fromARGB(255, 181, 174, 255),
+                    ),
                     child: const Text("Happy",
                         style: TextStyle(
                           fontSize: 17,
@@ -115,7 +117,11 @@ class _EmotionsPageState extends State<EmotionsPage> {
                       );
                     },
                   ),
-                ),
+                ), 
+
+
+
+                
                 SizedBox(
                   width: 125,
                   height: 70,

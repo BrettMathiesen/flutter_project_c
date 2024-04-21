@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-//import "package:firebase_auth/firebase_auth.dart";
 import 'package:flutter/material.dart';
 import 'package:project_c/pages/authscreen.dart';
 import './pages/splashpage.dart';
@@ -48,8 +47,6 @@ class MyApp extends StatelessWidget {
         '/splash': ((context) => const SplashPage()),
         '/disclaimer': ((context) => const DisclaimerPage()),
         '/situation': ((context) => const SituationPage()),
-        //  '/home' : ((context) => const MyHomePage( )),
-        //  '/identify' : ((context) => const IdentifyPage(situation: '' )),
         '/emotions': ((context) => const EmotionsPage(situation: '')),
         '/soothing': ((context) =>
             const SoothingPage(emotion: '', situation: '')),
@@ -58,7 +55,6 @@ class MyApp extends StatelessWidget {
             const SummaryPage(action: '', emotion: '', situation: '')),
          '/events': ((context) => const EventListPage()),   
       },
-      //home: const MyHomePage(title: 'Flutter Example App'),
       debugShowCheckedModeBanner: false,
     );
   }

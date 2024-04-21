@@ -14,7 +14,7 @@ class _SplashPageState extends State<SplashPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurpleAccent,
-        title: const Text('Mental Health Check',
+        title: const Text('Mental Check',
             style: TextStyle(
                 fontSize: 30, color: Color.fromARGB(255, 145, 245, 247))),
       ),

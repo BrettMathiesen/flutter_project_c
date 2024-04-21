@@ -54,8 +54,8 @@ class _AuthScreenState extends State<AuthScreen> {
             .collection('users')
             .doc(uid)
             .set({username: username, email: email});
-       // print('signed-up');
-       // Navigator.pushNamed(context, '/splash');
+        // print('signed-up');
+        // Navigator.pushNamed(context, '/splash');
       }
     } catch (error) {
       print('error');
@@ -78,98 +78,100 @@ class _AuthScreenState extends State<AuthScreen> {
                 style: TextStyle(
                     fontSize: 30, color: Color.fromARGB(255, 145, 245, 247))),
       ),
-      body: Container(
-        padding: EdgeInsets.all(10),
-        child: Form(
-          key: _formkey,
-          child: Column(
-            children: [
-              Container(
-                margin: const EdgeInsets.only(
-                    top: 120.0, left: 25.0, right: 25.0, bottom: 10),
-                child: TextFormField(
-                  controller: emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  validator: (value) {
-                    final bool emailValid = RegExp(
-                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                        .hasMatch(value!);
-                    if (!emailValid) {
-                      return "Enter valid email address";
-                    }
-                    return null;
-                  },
-                  decoration: const InputDecoration(
-                    fillColor: Color.fromARGB(255, 194, 232, 249),
-                    filled: true,
-                    border: OutlineInputBorder(),
-                    labelText: "Enter Email",
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.all(10),
+          child: Form(
+            key: _formkey,
+            child: Column(
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(
+                      top: 120.0, left: 25.0, right: 25.0, bottom: 10),
+                  child: TextFormField(
+                    controller: emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    validator: (value) {
+                      final bool emailValid = RegExp(
+                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                          .hasMatch(value!);
+                      if (!emailValid) {
+                        return "Enter valid email address";
+                      }
+                      return null;
+                    },
+                    decoration: const InputDecoration(
+                      fillColor: Color.fromARGB(255, 194, 232, 249),
+                      filled: true,
+                      border: OutlineInputBorder(),
+                      labelText: "Enter Email",
+                    ),
                   ),
                 ),
-              ),
-              if (!isLoginPage)
+                if (!isLoginPage)
+                  Container(
+                    margin: const EdgeInsets.only(
+                        top: 0.0, left: 25.0, right: 25.0, bottom: 10),
+                    child: TextFormField(
+                      controller: userNameController,
+                      keyboardType: TextInputType.name,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "UserName is required!";
+                        }
+                      },
+                      decoration: const InputDecoration(
+                          fillColor: Color.fromARGB(255, 194, 232, 249),
+                          filled: true,
+                          border: OutlineInputBorder(),
+                          labelText: "Enter UserName"),
+                    ),
+                  ),
                 Container(
                   margin: const EdgeInsets.only(
                       top: 0.0, left: 25.0, right: 25.0, bottom: 10),
                   child: TextFormField(
-                    controller: userNameController,
-                    keyboardType: TextInputType.name,
+                    controller: passwordController,
+                    keyboardType: TextInputType.visiblePassword,
+                    obscureText: true,
                     validator: (value) {
-                      if (value!.isEmpty) {
-                        return "UserName is required!";
+                      final bool validPass = RegExp(
+                              r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
+                          .hasMatch(value!);
+                      if (!validPass) {
+                        return "Enter valid Password";
                       }
+                      return null;
                     },
                     decoration: const InputDecoration(
-                        fillColor: Color.fromARGB(255, 194, 232, 249),
-                        filled: true,
-                        border: OutlineInputBorder(),
-                        labelText: "Enter UserName"),
+                      fillColor: Color.fromARGB(255, 194, 232, 249),
+                      filled: true,
+                      border: OutlineInputBorder(),
+                      labelText: "Enter Password",
+                    ),
                   ),
                 ),
-              Container(
-                margin: const EdgeInsets.only(
-                    top: 0.0, left: 25.0, right: 25.0, bottom: 10),
-                child: TextFormField(
-                  controller: passwordController,
-                  keyboardType: TextInputType.visiblePassword,
-                  obscureText: true,
-                  validator: (value) {
-                    final bool validPass = RegExp(
-                            r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
-                        .hasMatch(value!);
-                    if (!validPass) {
-                      return "Enter valid Password";
-                    }
-                    return null;
+                if (!isLoginPage)
+                  const SizedBox(
+                    height: 130,
+                  ),
+                if (isLoginPage)
+                  const SizedBox(
+                    height: 205,
+                  ),
+                const SizedBox(height: 10),
+                TextButton(
+                  onPressed: () {
+                    setState(() {
+                      isLoginPage = !isLoginPage;
+                    });
                   },
-                  decoration: const InputDecoration(
-                    fillColor: Color.fromARGB(255, 194, 232, 249),
-                    filled: true,
-                    border: OutlineInputBorder(),
-                    labelText: "Enter Password",
-                  ),
-                ),
-              ),
-              if (!isLoginPage)
-                const SizedBox(
-                  height: 130,
-                ),
-              if (isLoginPage)
-                const SizedBox(
-                  height: 205,
-                ),
-              const SizedBox(height: 10),
-              TextButton(
-                onPressed: () {
-                  setState(() {
-                    isLoginPage = !isLoginPage;
-                  });
-                },
-                child: isLoginPage
-                    ? const Text('Not a Memeber?')
-                    : const Text('Already a Member?'),
-              )
-            ],
+                  child: isLoginPage
+                      ? const Text('Not a Member?')
+                      : const Text('Already a Member?'),
+                )
+              ],
+            ),
           ),
         ),
       ),
